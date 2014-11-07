@@ -108,6 +108,7 @@
     <Compile Include="Operations\Identity\OperationIdentityRegistry.cs" />
     <Compile Include="Operations\Identity\OperationIdentityUtils.cs" />
     <Compile Include="Operations\Identity\StrictOperationIdentity.cs" />
+    <Compile Include="Operations\Identity\StrictOperationIdentityUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
