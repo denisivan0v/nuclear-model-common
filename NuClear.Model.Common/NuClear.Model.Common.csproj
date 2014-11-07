@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D9B8B4E8-F7D4-4807-8561-495A47A9CDB7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NuClear.Model.Common</RootNamespace>
+    <AssemblyName>2GIS.NuClear.Model.Common</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile151</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\2GIS.NuClear.Model.Common.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Aspects\IAuditableEntity.cs" />
+    <Compile Include="Entities\Aspects\IBaseEntity.cs" />
+    <Compile Include="Entities\Aspects\ICuratedEntity.cs" />
+    <Compile Include="Entities\Aspects\IDeactivatableEntity.cs" />
+    <Compile Include="Entities\Aspects\IDeletableEntity.cs" />
+    <Compile Include="Entities\Aspects\IDomainEntityDto.cs" />
+    <Compile Include="Entities\Aspects\IDynamicEntityInstance.cs" />
+    <Compile Include="Entities\Aspects\IDynamicEntityPropertyInstance.cs" />
+    <Compile Include="Entities\Aspects\IEntity.cs" />
+    <Compile Include="Entities\Aspects\IEntityFile.cs" />
+    <Compile Include="Entities\Aspects\IEntityFileOptional.cs" />
+    <Compile Include="Entities\Aspects\IEntityKey.cs" />
+    <Compile Include="Entities\Aspects\IEntityPart.cs" />
+    <Compile Include="Entities\Aspects\INonActivityDynamicEntityPropertyInstance.cs" />
+    <Compile Include="Entities\Aspects\Integration\IImported.cs" />
+    <Compile Include="Entities\Aspects\Integration\IIntegrationProcessorState.cs" />
+    <Compile Include="Entities\Aspects\Integration\IReplicable.cs" />
+    <Compile Include="Entities\Aspects\Integration\IReplicableExplicitly.cs" />
+    <Compile Include="Entities\Aspects\IPartable.cs" />
+    <Compile Include="Entities\Aspects\IStateTrackingEntity.cs" />
+    <Compile Include="Entities\EntityNameUtils.cs" />
+    <Compile Include="Entities\EntityNameUtils.Hash.cs" />
+    <Compile Include="Entities\EntitySet.cs" />
+    <Compile Include="Entities\EntitySetExtension.cs" />
+    <Compile Include="Entities\IEntityName.cs" />
+    <Compile Include="IdentityBase.cs" />
+    <Compile Include="IIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ActionHistoryIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ActivateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\AppendIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\AssignIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\BulkActivateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\BulkCreateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\BulkDeactivateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\BulkDeleteIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\BulkUpdateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ChangeClientIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ChangeTerritoryIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\CheckForDebtsIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\CopyIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\CreateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\DeactivateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\DeleteIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\DetachIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\DisqualifyIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\DownloadIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ExportIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\GetDomainEntityDtoIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ListIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ListNonGenericIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\MergeIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ModifyBusinessModelEntityIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ModifySimplifiedModelEntityIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\MsCrmExportIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\PrintIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\QualifyIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\UpdateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\UploadIdentity.cs" />
+    <Compile Include="Operations\Identity\IBusinessModelIdentity.cs" />
+    <Compile Include="Operations\Identity\IEntitySpecificOperationIdentity.cs" />
+    <Compile Include="Operations\Identity\INonCoupledOperationIdentity.cs" />
+    <Compile Include="Operations\Identity\IOperationIdentity.cs" />
+    <Compile Include="Operations\Identity\IOperationIdentityRegistry.cs" />
+    <Compile Include="Operations\Identity\ISimplifiedModelIdentity.cs" />
+    <Compile Include="Operations\Identity\OperationIdentityBase.cs" />
+    <Compile Include="Operations\Identity\OperationIdentityIds.cs" />
+    <Compile Include="Operations\Identity\OperationIdentityRegistry.cs" />
+    <Compile Include="Operations\Identity\OperationIdentityUtils.cs" />
+    <Compile Include="Operations\Identity\StrictOperationIdentity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
