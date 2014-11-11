@@ -5,19 +5,19 @@ namespace NuClear.Model.Common.Entities
     public static partial class EntityNameUtils
     {
        
-        public static string EntitiesToString(this IEntityName[] entityNames)
+        public static string EntitiesToString(this EntityType[] entityTypes)
         {
-            if (entityNames == null || entityNames.Length == 0)
+            if (entityTypes == null || entityTypes.Length == 0)
             {
                 return "Entities list is empty";
             }
 
             var sb = new StringBuilder();
-            sb.Append(entityNames[0].ToString());
-            for (int i = 1; i < entityNames.Length; i++)
+            sb.Append(entityTypes[0].ToString());
+            for (int i = 1; i < entityTypes.Length; i++)
             {
                 sb.Append(";")
-                  .Append(entityNames[i].ToString());
+                  .Append(entityTypes[i].ToString());
             }
 
             return sb.ToString();

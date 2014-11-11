@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace NuClear.Model.Common.Entities
@@ -7,9 +7,9 @@ namespace NuClear.Model.Common.Entities
     public sealed class EntitySet : IEquatable<EntitySet>
     {
         [DataMember]
-        private readonly IEntityName[] _entities;
+        private readonly EntityType[] _entities;
 
-        public EntitySet(params IEntityName[] entities)
+        public EntitySet(params EntityType[] entities)
         {
             if (entities == null || entities.Length == 0)
             {
@@ -19,7 +19,20 @@ namespace NuClear.Model.Common.Entities
             _entities = entities;
         }
 
-        public IEntityName[] Entities
+        public static EntityType OpenEntitiesSetIndicator
+        {
+            get
+            {
+                return EntityType.All;
+            }
+        }
+
+        public static EntityType EmptySetIndicator
+        {
+            get { return EntityType.None; }
+        }
+
+        public EntityType[] Entities
         {
             get
             {
@@ -75,6 +88,25 @@ namespace NuClear.Model.Common.Entities
         bool IEquatable<EntitySet>.Equals(EntitySet other)
         {
             return Equals(other);
+        }
+
+        public static class Create
+        {
+            public static EntitySet NonCoupled
+            {
+                get
+                {
+                    return new EntitySet(new[] { EmptySetIndicator });
+                }
+            }
+
+            public static EntitySet GenericEntitySpecific
+            {
+                get
+                {
+                    return new EntitySet(new[] { OpenEntitiesSetIndicator });
+                }
+            }
         }
     }
 }

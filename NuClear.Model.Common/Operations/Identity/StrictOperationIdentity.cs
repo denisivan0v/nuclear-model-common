@@ -30,7 +30,7 @@ namespace NuClear.Model.Common.Operations.Identity
             get { return _operationIdentity; }
         }
 
-        public IEntityName[] Entities
+        public EntityType[] Entities
         {
             get { return _entitySet.Entities; }
         }

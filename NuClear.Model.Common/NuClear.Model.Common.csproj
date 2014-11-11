@@ -13,7 +13,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile151</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\2GIS.NuClear.Model.Common.snk</AssemblyOriginatorKeyFile>
@@ -37,6 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <TargetPlatform Include="Windows, Version=8.1" />
+    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Aspects\IAuditableEntity.cs" />
@@ -63,9 +65,15 @@
     <Compile Include="Entities\EntityNameUtils.Hash.cs" />
     <Compile Include="Entities\EntitySet.cs" />
     <Compile Include="Entities\EntitySetExtension.cs" />
-    <Compile Include="Entities\IEntityName.cs" />
+    <Compile Include="Entities\EntityType.cs" />
+    <Compile Include="Entities\EntityTypeAll.cs" />
+    <Compile Include="Entities\EntityTypeInstancesStorage.cs" />
+    <Compile Include="Entities\EntityTypeMap.cs" />
+    <Compile Include="Entities\EntityTypeUtils.cs" />
+    <Compile Include="Entities\OpenEnitiesSetEnumerator.cs" />
     <Compile Include="IdentityBase.cs" />
     <Compile Include="IIdentity.cs" />
+    <Compile Include="Entities\EntityTypeNone.cs" />
     <Compile Include="Operations\Identity\Generic\ActionHistoryIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\ActivateIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\AppendIdentity.cs" />

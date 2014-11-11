@@ -4,12 +4,12 @@ namespace NuClear.Model.Common.Entities
 {
     public static partial class EntityNameUtils
     {
-        public static int EvaluateHashSimplified(this IEntityName[] entities)
+        public static int EvaluateHashSimplified(this EntityType[] entities)
         {
             return EvaluateEntitiesHashSimplified(entities);
         }
 
-        public static int EvaluateEntitiesHashSimplified(params IEntityName[] entities)
+        public static int EvaluateEntitiesHashSimplified(params EntityType[] entities)
         {
             const int Multipler = 0x1000193;
             int hash = 0x7b26bcc5;
@@ -25,12 +25,12 @@ namespace NuClear.Model.Common.Entities
             return hash;
         }
 
-        public static int EvaluateHash(this IEntityName[] entities)
+        public static int EvaluateHash(this EntityType[] entities)
         {
             return EvaluateEntitiesHash(entities);
         }
 
-        public static int EvaluateEntitiesHash(params IEntityName[] entities)
+        public static int EvaluateEntitiesHash(params EntityType[] entities)
         {
             // http://en.wikipedia.org/wiki/Jenkins_hash_function
             uint hash = 0;
@@ -49,9 +49,9 @@ namespace NuClear.Model.Common.Entities
             return (int)hash;
         }
 
-        private static int AsInt(this IEntityName entityName)
+        private static int AsInt(this EntityType entityType)
         {
-            return (int)Convert.ChangeType(entityName, typeof(int));
+            return (int)Convert.ChangeType(entityType, typeof(int));
         }
     }
 }
