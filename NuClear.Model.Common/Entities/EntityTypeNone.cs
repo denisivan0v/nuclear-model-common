@@ -1,9 +1,10 @@
 ﻿namespace NuClear.Model.Common.Entities
 {
-    internal class EntityTypeNone : EntityType
+    public class EntityTypeNone : EntityType
     {
-        public EntityTypeNone() : base(0, "None")
+        internal EntityTypeNone() : base(0, "None")
         {
+            Initialize(this);
         }
     }
 }

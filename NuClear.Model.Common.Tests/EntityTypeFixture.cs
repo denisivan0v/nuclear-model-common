@@ -29,5 +29,25 @@ namespace NuClear.Model.Common.Tests
             EntityType.None.Should().NotBe(EntityType.All);
             EntityType.None.Should().NotBeSameAs(EntityType.All);
         }
+
+        [Fact]
+        public void GetEntityType_method_should_always_return_same_instance()
+        {
+            EntityType.GetEntityType<EntityTypeNone>().Should().BeSameAs(EntityType.GetEntityType<EntityTypeNone>());
+            EntityType.GetEntityType<EntityTypeNone>().Should().BeSameAs(EntityType.None);
+        }
+
+        [Fact]
+        public void TryParse_extension_method_should_return_instance_based_on_identity_description()
+        {
+            const string None = "None";
+            var initializedInstance = EntityType.None;
+
+            EntityTypeNone instance;
+            if (EntityType.TryParse(None, out instance))
+            {
+                instance.Should().BeSameAs(initializedInstance);
+            }
+        }
     }
 }

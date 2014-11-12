@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace NuClear.Model.Common.Entities
 {
-    internal class EntityTypeInstancesStorage
+    // TODO {d.ivanov, 12.11.2014}: analyze all assemblies in AppDomain and grab all EntityType derived types
+    public class EntityTypeInstancesStorage
     {
         private readonly Lazy<Dictionary<Type, EntityType>> _storage = new Lazy<Dictionary<Type, EntityType>>();
 
-        public int Count
+        internal EntityTypeInstancesStorage()
         {
-            get { return _storage.Value.Count; }
         }
 
         public void Add(EntityType item)
@@ -17,9 +17,9 @@ namespace NuClear.Model.Common.Entities
             _storage.Value.Add(item.GetType(), item);
         }
 
-        public bool Contains(Type itemType)
+        public bool Contains(EntityType entityType)
         {
-            return _storage.Value.ContainsKey(itemType);
+            return _storage.Value.ContainsKey(entityType.GetType());
         }
 
         public bool TryGetInstance<TInstance>(Type itemType, out TInstance value) where TInstance : EntityType
@@ -29,6 +29,11 @@ namespace NuClear.Model.Common.Entities
             
             value = entityType as TInstance;
             return value != null;
+        }
+
+        public IEnumerable<EntityType> GetAllInstances()
+        {
+            return _storage.Value.Values;
         }
     }
 }

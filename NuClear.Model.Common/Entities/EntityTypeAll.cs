@@ -2,8 +2,9 @@
 {
     public class EntityTypeAll : EntityType
     {
-        public EntityTypeAll() : base(1, "All")
+        internal EntityTypeAll() : base(1, "All")
         {
+            Initialize(this);
         }
     }
 }
