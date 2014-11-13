@@ -3,37 +3,32 @@ using System.Collections.Generic;
 
 namespace NuClear.Model.Common.Entities
 {
-    // TODO {d.ivanov, 12.11.2014}: analyze all assemblies in AppDomain and grab all EntityType derived types
-    public class EntityTypeInstancesStorage
+    internal class EntityTypeInstancesStorage
     {
-        private readonly Lazy<Dictionary<Type, EntityType>> _storage = new Lazy<Dictionary<Type, EntityType>>();
+        private readonly Dictionary<Type, IEntityType> _storage = new Dictionary<Type, IEntityType>();
 
-        internal EntityTypeInstancesStorage()
+        public void Add(IEntityType item)
         {
+            _storage.Add(item.GetType(), item);
         }
 
-        public void Add(EntityType item)
+        public bool Contains(IEntityType entityType)
         {
-            _storage.Value.Add(item.GetType(), item);
+            return _storage.ContainsKey(entityType.GetType());
         }
 
-        public bool Contains(EntityType entityType)
+        public bool TryGetInstance<TInstance>(Type itemType, out TInstance value) where TInstance : class, IEntityType
         {
-            return _storage.Value.ContainsKey(entityType.GetType());
-        }
-
-        public bool TryGetInstance<TInstance>(Type itemType, out TInstance value) where TInstance : EntityType
-        {
-            EntityType entityType;
-            _storage.Value.TryGetValue(itemType, out entityType);
+            IEntityType entityType;
+            _storage.TryGetValue(itemType, out entityType);
             
             value = entityType as TInstance;
             return value != null;
         }
 
-        public IEnumerable<EntityType> GetAllInstances()
+        public IEnumerable<IEntityType> GetAllInstances()
         {
-            return _storage.Value.Values;
+            return _storage.Values;
         }
     }
 }

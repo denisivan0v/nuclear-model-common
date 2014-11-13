@@ -1,10 +1,15 @@
 ﻿namespace NuClear.Model.Common.Entities
 {
-    public class EntityTypeAll : EntityType
+    public sealed class EntityTypeAll : EntityTypeBase<EntityTypeAll>
     {
-        internal EntityTypeAll() : base(1, "All")
+        public override int Id
         {
-            Initialize(this);
+            get { return 1; }
+        }
+
+        public override string Description
+        {
+            get { return "All"; }
         }
     }
 }

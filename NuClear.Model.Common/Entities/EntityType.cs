@@ -3,121 +3,43 @@ using System.Linq;
 
 namespace NuClear.Model.Common.Entities
 {
-    public abstract class EntityType
+    // TODO {d.ivanov, 12.11.2014}: analyze all assemblies in AppDomain and grab all IEntityType derived types
+    public class EntityType
     {
-        private static readonly EntityTypeInstancesStorage InstancesStorage = new EntityTypeInstancesStorage();
-        private readonly IIdentity _identity;
-        
-        protected EntityType(int id, string description) : this(new EntityIdentity(id, description))
+        private static readonly Lazy<EntityType> SingleInstance = new Lazy<EntityType>(() => new EntityType());
+        private readonly EntityTypeInstancesStorage _instancesStorage = new EntityTypeInstancesStorage();
+
+        private EntityType()
         {
         }
 
-        private EntityType(IIdentity identity)
+        public static EntityType Instance
         {
-            _identity = identity;
+            get { return SingleInstance.Value; }
         }
 
-        public static EntityType None
+        public bool TryParse(string description, out IEntityType value)
         {
-            get { return GetEntityType<EntityTypeNone>() ?? new EntityTypeNone(); }
-        }
-
-        public static EntityType All
-        {
-            get
-            {
-                return GetEntityType<EntityTypeAll>() ?? new EntityTypeAll();
-            }
-        }
-
-        public IIdentity Identity
-        {
-            get { return _identity; }
-        }
-
-        public static explicit operator int(EntityType entityType)
-        {
-            return entityType._identity.Id;
-        }
-        
-        public static T GetEntityType<T>() where T : EntityType
-        {
-            T instance;
-            return InstancesStorage.TryGetInstance(typeof(T), out instance) ? instance : null;
-        }
-
-        public static bool TryParse<T>(string description, out T value) where T : EntityType
-        {
-            var entityTypes = InstancesStorage.GetAllInstances();
-            value = (T)entityTypes.FirstOrDefault(x => x.Identity.Description.Equals(description, StringComparison.OrdinalIgnoreCase));
+            var entityTypes = _instancesStorage.GetAllInstances();
+            value = entityTypes.FirstOrDefault(x => x.Description.Equals(description, StringComparison.OrdinalIgnoreCase));
 
             return value != null;
         }
-        
-        public override string ToString()
+
+        public bool TryGet<TEntityType>(out TEntityType entityType) where TEntityType : class, IEntityType, new()
         {
-            return string.Format("Type name: {0}, Id = {1}, Value = {2}", GetType().Name, _identity.Id, _identity.Description);
+            return _instancesStorage.TryGetInstance(typeof(TEntityType), out entityType);
         }
 
-        public override bool Equals(object obj)
+        internal bool TryAdd(IEntityType value)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (!_instancesStorage.Contains(value))
             {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
+                _instancesStorage.Add(value);
                 return true;
             }
 
-            var other = (EntityType)obj;
-            return _identity.Equals(other._identity);
-        }
-
-        public override int GetHashCode()
-        {
-            return _identity.Id.GetHashCode();
-        }
-
-        protected static void Initialize(EntityType entityType)
-        {
-            if (!InstancesStorage.Contains(entityType))
-            {
-                InstancesStorage.Add(entityType);
-            }
-        }
-
-        private class EntityIdentity : IIdentity
-        {
-            private readonly int _id;
-            private readonly string _description;
-
-            public EntityIdentity(int id, string description)
-            {
-                _id = id;
-                _description = description;
-            }
-
-            public int Id
-            {
-                get { return _id; }
-            }
-
-            public string Description
-            {
-                get { return _description; }
-            }
-
-            public bool Equals(IIdentity other)
-            {
-                if (other == null)
-                {
-                    return false;
-                }
-
-                return _id == other.Id;
-            }
+            return false;
         }
     }
 }

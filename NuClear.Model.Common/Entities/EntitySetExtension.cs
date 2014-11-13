@@ -5,12 +5,12 @@ namespace NuClear.Model.Common.Entities
 {
     public static class EntitySetExtension
     {
-        public static EntitySet ToEntitySet(this EntityType entityName)
+        public static EntitySet ToEntitySet(this IEntityType entityName)
         {
             return new EntitySet(new[] { entityName });
         }
 
-        public static EntitySet ToEntitySet(this EntityType[] entityNames)
+        public static EntitySet ToEntitySet(this IEntityType[] entityNames)
         {
             return new EntitySet(entityNames);
         }

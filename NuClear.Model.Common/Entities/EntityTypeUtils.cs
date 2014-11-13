@@ -7,19 +7,19 @@ namespace NuClear.Model.Common.Entities
         /// <summary>
         /// Список значений EntityName, являющихся composed - т.е. комбинирующими
         /// </summary>
-        public static readonly EntityType[] ComposedEntityNames = { EntityType.None, EntityType.All };
+        public static readonly IEntityType[] ComposedEntityNames = { EntityType.Instance.None(), EntityType.Instance.All() };
 
         /// <summary>
         /// Разложить composed значение на составляющие, если на вход передано не composed (элементарное) значение EntityName - возвращается оно без изменений
         /// </summary>
-        public static EntityType[] GetDecomposed(this EntityType entityName)
+        public static IEntityType[] GetDecomposed(this IEntityType entityName)
         {
-            if (entityName.Equals(EntityType.None))
+            if (entityName.Equals(EntityType.Instance.None()))
             {
-                return new EntityType[0];
+                return new IEntityType[0];
             }
 
-            if (entityName.Equals(EntityType.All))
+            if (entityName.Equals(EntityType.Instance.All()))
             {
                 // FIXME {d.ivanov, 11.11.2014}: Восстановить логику
                 /*
@@ -34,7 +34,7 @@ namespace NuClear.Model.Common.Entities
             return new[] { entityName };
         }
 
-        public static bool IsVirtual(this EntityType entityName)
+        public static bool IsVirtual(this IEntityType entityName)
         {
             // FIXME {d.ivanov, 11.11.2014}: Восстановить логику
 

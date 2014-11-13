@@ -1,10 +1,15 @@
 ﻿namespace NuClear.Model.Common.Entities
 {
-    public class EntityTypeNone : EntityType
+    public class EntityTypeNone : EntityTypeBase<EntityTypeNone>
     {
-        internal EntityTypeNone() : base(0, "None")
+        public override int Id
         {
-            Initialize(this);
+            get { return 0; }
+        }
+
+        public override string Description
+        {
+            get { return "None"; }
         }
     }
 }

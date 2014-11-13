@@ -7,9 +7,9 @@ namespace NuClear.Model.Common.Entities
     public sealed class EntitySet : IEquatable<EntitySet>
     {
         [DataMember]
-        private readonly EntityType[] _entities;
+        private readonly IEntityType[] _entities;
 
-        public EntitySet(params EntityType[] entities)
+        public EntitySet(params IEntityType[] entities)
         {
             if (entities == null || entities.Length == 0)
             {
@@ -19,20 +19,20 @@ namespace NuClear.Model.Common.Entities
             _entities = entities;
         }
 
-        public static EntityType OpenEntitiesSetIndicator
+        public static IEntityType OpenEntitiesSetIndicator
         {
             get
             {
-                return EntityType.All;
+                return EntityType.Instance.All();
             }
         }
 
-        public static EntityType EmptySetIndicator
+        public static IEntityType EmptySetIndicator
         {
-            get { return EntityType.None; }
+            get { return EntityType.Instance.None(); }
         }
 
-        public EntityType[] Entities
+        public IEntityType[] Entities
         {
             get
             {

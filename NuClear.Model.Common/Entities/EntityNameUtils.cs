@@ -4,8 +4,7 @@ namespace NuClear.Model.Common.Entities
 {
     public static partial class EntityNameUtils
     {
-       
-        public static string EntitiesToString(this EntityType[] entityTypes)
+        public static string EntitiesToString(this IEntityType[] entityTypes)
         {
             if (entityTypes == null || entityTypes.Length == 0)
             {

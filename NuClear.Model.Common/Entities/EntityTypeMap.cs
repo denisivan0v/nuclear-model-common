@@ -8,7 +8,7 @@ namespace NuClear.Model.Common.Entities
 {
     public static class EntityTypeMap
     {
-        private static readonly Dictionary<EntityType, Type> TypeMap = new Dictionary<EntityType, Type>
+        private static readonly Dictionary<IEntityType, Type> TypeMap = new Dictionary<IEntityType, Type>
             {
                 /*
                 // ERM
@@ -177,14 +177,14 @@ namespace NuClear.Model.Common.Entities
                 */
             };
 
-        private static readonly Dictionary<Type, EntityType> ReverseTypeMap = TypeMap.ToDictionary(x => x.Value, x => x.Key);
+        private static readonly Dictionary<Type, IEntityType> ReverseTypeMap = TypeMap.ToDictionary(x => x.Value, x => x.Key);
 
-        public static IReadOnlyDictionary<EntityType, Type> EntitiesMapping
+        public static IReadOnlyDictionary<IEntityType, Type> EntitiesMapping
         {
             get { return TypeMap; }
         }
 
-        public static Type AsEntityType(this EntityType entityName)
+        public static Type AsEntityType(this IEntityType entityName)
         {
             Type type;
             if (!entityName.TryGetEntityType(out type))
@@ -195,9 +195,9 @@ namespace NuClear.Model.Common.Entities
             return type;
         }
 
-        public static EntityType AsEntityName(this Type entityType)
+        public static IEntityType AsEntityName(this Type entityType)
         {
-            EntityType entityName;
+            IEntityType entityName;
             if (!entityType.TryGetEntityName(out entityName))
             {
                 throw new ArgumentException(string.Format("Cannot find EntityName mapped to type {0}", entityType.Name));
@@ -206,15 +206,15 @@ namespace NuClear.Model.Common.Entities
             return entityName;
         }
 
-        public static bool TryGetEntityType(this EntityType entityName, out Type entityType)
+        public static bool TryGetEntityType(this IEntityType entityName, out Type entityType)
         {
             entityType = null;
             return !entityName.IsVirtual() && TypeMap.TryGetValue(entityName, out entityType);
         }
 
-        public static bool TryGetEntityName(this Type type, out EntityType entityName)
+        public static bool TryGetEntityName(this Type type, out IEntityType entityName)
         {
-            entityName = EntityType.None;
+            entityName = EntityType.Instance.None();
 
             // FIXME {d.ivanov, 11.11.2014}: Восстановить логику
             /*
@@ -228,14 +228,14 @@ namespace NuClear.Model.Common.Entities
             return !type.IsPersistenceOnly() && ReverseTypeMap.TryGetValue(type, out entityName);
         }
 
-        public static EntityType[] Convert2EntityNames(params Type[] entitiesTypes)
+        public static IEntityType[] Convert2EntityNames(params Type[] entitiesTypes)
         {
             var sb = new StringBuilder();
-            var entityNames = new EntityType[entitiesTypes.Length];
+            var entityNames = new IEntityType[entitiesTypes.Length];
             for (var index = 0; index < entitiesTypes.Length; index++)
             {
                 var entitiesType = entitiesTypes[index];
-                EntityType entityName;
+                IEntityType entityName;
                 if (!entitiesType.TryGetEntityName(out entityName))
                 {
                     sb.AppendFormat(
@@ -255,7 +255,7 @@ namespace NuClear.Model.Common.Entities
             return entityNames;
         }
 
-        public static EntityType[] AsEntityNames(this Type[] entitiesTypes)
+        public static IEntityType[] AsEntityNames(this Type[] entitiesTypes)
         {
             return Convert2EntityNames(entitiesTypes);
         }

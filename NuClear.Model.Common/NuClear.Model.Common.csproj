@@ -61,10 +61,13 @@
     <Compile Include="Entities\EntitySet.cs" />
     <Compile Include="Entities\EntitySetExtension.cs" />
     <Compile Include="Entities\EntityType.cs" />
+    <Compile Include="Entities\EntityTypeBase.cs" />
     <Compile Include="Entities\EntityTypeAll.cs" />
+    <Compile Include="Entities\EntityTypeExtensions.cs" />
     <Compile Include="Entities\EntityTypeInstancesStorage.cs" />
     <Compile Include="Entities\EntityTypeMap.cs" />
     <Compile Include="Entities\EntityTypeUtils.cs" />
+    <Compile Include="Entities\IEntityType.cs" />
     <Compile Include="Entities\OpenEnitiesSetEnumerator.cs" />
     <Compile Include="IdentityBase.cs" />
     <Compile Include="IIdentity.cs" />

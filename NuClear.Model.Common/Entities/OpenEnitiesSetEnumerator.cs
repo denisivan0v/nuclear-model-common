@@ -7,11 +7,11 @@ namespace NuClear.Model.Common.Entities
 {
     public sealed class OpenEnitiesSetEnumerator : IEnumerable<EntitySet>
     {
-        private readonly EntityType[] _allEntities = EntityType.All
-                                                               .GetDecomposed()
-                                                               .Where(e => !e.IsVirtual())
-                                                               .ToArray();
-        private readonly EntityType[] _currentState;
+        private readonly IEntityType[] _allEntities = EntityType.Instance.All()
+                                                                .GetDecomposed()
+                                                                .Where(e => !e.IsVirtual())
+                                                                .ToArray();
+        private readonly IEntityType[] _currentState;
         private readonly int[] _placeholdersIndexes;
         private readonly int[] _placeholdersState;
 
@@ -24,7 +24,7 @@ namespace NuClear.Model.Common.Entities
                 throw new ArgumentException("Specified entities set must  be not empty open set");
             }
 
-            _currentState = new EntityType[sourceEntitySet.Entities.Length];
+            _currentState = new IEntityType[sourceEntitySet.Entities.Length];
 
             var placeholdersIndexes = new List<int>();
 

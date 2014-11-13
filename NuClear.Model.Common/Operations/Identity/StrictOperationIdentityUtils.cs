@@ -20,7 +20,7 @@ namespace NuClear.Model.Common.Operations.Identity
             return new StrictOperationIdentity(operationIdentity, new[] { typeof(TEntity1), typeof(TEntity2) }.AsEntitySet());
         }
 
-        public static StrictOperationIdentity SpecificFor(this IEntitySpecificOperationIdentity operationIdentity, params EntityType[] entityNames)
+        public static StrictOperationIdentity SpecificFor(this IEntitySpecificOperationIdentity operationIdentity, params IEntityType[] entityNames)
         {
             return new StrictOperationIdentity(operationIdentity, entityNames.ToEntitySet());
         }
