@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace NuClear.Model.Common.Entities
 {
@@ -7,7 +8,7 @@ namespace NuClear.Model.Common.Entities
         /// <summary>
         /// Список значений EntityName, являющихся composed - т.е. комбинирующими
         /// </summary>
-        public static readonly IEntityType[] ComposedEntityNames = { EntityType.Instance.None(), EntityType.Instance.All() };
+        public static readonly IEntityType[] ComposedEntityTypes = { EntityType.Instance.None(), EntityType.Instance.All() };
 
         /// <summary>
         /// Разложить composed значение на составляющие, если на вход передано не composed (элементарное) значение EntityName - возвращается оно без изменений
@@ -21,14 +22,10 @@ namespace NuClear.Model.Common.Entities
 
             if (entityName.Equals(EntityType.Instance.All()))
             {
-                // FIXME {d.ivanov, 11.11.2014}: Восстановить логику
-                /*
-                var allValues = (EntityName[])Enum.GetValues(typeof(EntityName));
-                return allValues
-                    .Except(ComposedEntityNames)
-                    //.Except(VirtualEntityNames)
+                var entityTypes = EntityType.Instance.GetTypes();
+                return entityTypes
+                    .Except(ComposedEntityTypes)
                     .ToArray();
-                 */
             }
 
             return new[] { entityName };

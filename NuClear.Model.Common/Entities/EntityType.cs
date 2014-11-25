@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NuClear.Model.Common.Entities
@@ -18,9 +19,14 @@ namespace NuClear.Model.Common.Entities
             get { return SingleInstance.Value; }
         }
 
+        public IEnumerable<IEntityType> GetTypes()
+        {
+            return _instancesStorage.GetAllInstances();
+        }
+
         public bool TryParse(string description, out IEntityType value)
         {
-            var entityTypes = _instancesStorage.GetAllInstances();
+            var entityTypes = GetTypes();
             value = entityTypes.FirstOrDefault(x => x.Description.Equals(description, StringComparison.OrdinalIgnoreCase));
 
             return value != null;
@@ -30,7 +36,7 @@ namespace NuClear.Model.Common.Entities
         {
             return _instancesStorage.TryGetInstance(typeof(TEntityType), out entityType);
         }
-
+        
         internal bool TryAdd(IEntityType value)
         {
             if (!_instancesStorage.Contains(value))

@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityTypeFixture.cs" />
+    <Compile Include="EntityTypeMapFixture.cs" />
+    <Compile Include="EntityTypeMapFixture.Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

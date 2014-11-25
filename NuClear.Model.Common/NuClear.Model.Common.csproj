@@ -66,6 +66,7 @@
     <Compile Include="Entities\EntityTypeExtensions.cs" />
     <Compile Include="Entities\EntityTypeInstancesStorage.cs" />
     <Compile Include="Entities\EntityTypeMap.cs" />
+    <Compile Include="Entities\EntityTypeMappingRegistry.cs" />
     <Compile Include="Entities\EntityTypeUtils.cs" />
     <Compile Include="Entities\IEntityType.cs" />
     <Compile Include="Entities\OpenEnitiesSetEnumerator.cs" />

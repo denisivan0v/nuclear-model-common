@@ -1,215 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace NuClear.Model.Common.Entities
 {
     public static class EntityTypeMap
     {
-        private static readonly Dictionary<IEntityType, Type> TypeMap = new Dictionary<IEntityType, Type>
-            {
-                /*
-                // ERM
-                { EntityName.Deal, typeof(Deal) },
-                { EntityName.BranchOfficeOrganizationUnit, typeof(BranchOfficeOrganizationUnit) },
-                { EntityName.ChileBranchOfficeOrganizationUnitPart, typeof(ChileBranchOfficeOrganizationUnitPart) },
-                { EntityName.EmiratesBranchOfficeOrganizationUnitPart, typeof(EmiratesBranchOfficeOrganizationUnitPart) },
-                { EntityName.LegalPerson, typeof(LegalPerson) },
-                { EntityName.LegalPersonDeal, typeof(LegalPersonDeal) },
-                { EntityName.ChileLegalPersonPart, typeof(ChileLegalPersonPart) },
-                { EntityName.UkraineLegalPersonPart, typeof(UkraineLegalPersonPart) },
-                { EntityName.EmiratesLegalPersonPart, typeof(EmiratesLegalPersonPart) },
-                { EntityName.KazakhstanLegalPersonPart, typeof(KazakhstanLegalPersonPart) },
-                { EntityName.KazakhstanLegalPersonProfilePart, typeof(KazakhstanLegalPersonProfilePart) },
-                { EntityName.OperationType, typeof(OperationType) },
-                { EntityName.Order, typeof(Order) },
-                { EntityName.OrderPosition, typeof(OrderPosition) },
-                { EntityName.OrderProcessingRequest, typeof(OrderProcessingRequest) },
-                { EntityName.OrderProcessingRequestMessage, typeof(OrderProcessingRequestMessage) },
-                { EntityName.OrderFile, typeof(OrderFile) },
-                { EntityName.AccountDetail, typeof(AccountDetail) },
-                { EntityName.Price, typeof(Price) },
-                { EntityName.Firm, typeof(Firm) },
-                { EntityName.FirmDeal, typeof(FirmDeal) },
-                { EntityName.FirmAddress, typeof(FirmAddress) },
-                { EntityName.EmiratesFirmAddressPart, typeof(EmiratesFirmAddressPart) },
-                { EntityName.FirmContact, typeof(FirmContact) },
-                { EntityName.BranchOffice, typeof(BranchOffice) },
-                { EntityName.UkraineBranchOfficePart, typeof(UkraineBranchOfficePart) },
-                { EntityName.OrganizationUnit, typeof(OrganizationUnit) },
-                { EntityName.Project, typeof(Project) },
-                { EntityName.Client, typeof(Client) },
-                { EntityName.ClientLink, typeof(ClientLink) },
-                { EntityName.DenormalizedClientLink, typeof(DenormalizedClientLink) },
-                { EntityName.EmiratesClientPart, typeof(EmiratesClientPart) },
-                { EntityName.Bargain, typeof(Bargain) },
-                { EntityName.BargainType, typeof(BargainType) },
-                { EntityName.BargainFile, typeof(BargainFile) },
-                { EntityName.Currency, typeof(Currency) },
-                { EntityName.CurrencyRate, typeof(CurrencyRate) },
-                { EntityName.Platform, typeof(Erm.Platform) },
-                { EntityName.PositionCategory, typeof(PositionCategory) },
-                { EntityName.PricePosition, typeof(PricePosition) },
-                { EntityName.Account, typeof(Account) },
-                { EntityName.Limit, typeof(Limit) },
-                { EntityName.Position, typeof(Position) },
-                { EntityName.PositionChildren, typeof(PositionChildren) },
-                { EntityName.AssociatedPositionsGroup, typeof(AssociatedPositionsGroup) },
-                { EntityName.AssociatedPosition, typeof(AssociatedPosition) },
-                { EntityName.DeniedPosition, typeof(DeniedPosition) },
-                { EntityName.ContributionType, typeof(ContributionType) },
-                { EntityName.Category, typeof(Category) },
-                { EntityName.CategoryOrganizationUnit, typeof(CategoryOrganizationUnit) },
-                { EntityName.CategoryGroup, typeof(CategoryGroup) },
-                { EntityName.CategoryFirmAddress, typeof(CategoryFirmAddress) },
-                { EntityName.Country, typeof(Country) },
-                { EntityName.Advertisement, typeof(Advertisement) },
-                { EntityName.AdvertisementTemplate, typeof(AdvertisementTemplate) },
-                { EntityName.AdvertisementElement, typeof(AdvertisementElement) },
-                { EntityName.AdvertisementElementDenialReason, typeof(AdvertisementElementDenialReason) },
-                { EntityName.AdvertisementElementStatus, typeof(AdvertisementElementStatus) },
-                { EntityName.AdvertisementElementTemplate, typeof(AdvertisementElementTemplate) },
-                { EntityName.AdsTemplatesAdsElementTemplate, typeof(AdsTemplatesAdsElementTemplate) },
-                { EntityName.Bill, typeof(Bill) },
-                { EntityName.Lock, typeof(Lock) },
-                { EntityName.LockDetail, typeof(LockDetail) },
-                { EntityName.RegionalAdvertisingSharing, typeof(RegionalAdvertisingSharing) },
-                { EntityName.Contact, typeof(Contact) },
-                { EntityName.WithdrawalInfo, typeof(WithdrawalInfo) },
-                { EntityName.ReleaseInfo, typeof(ReleaseInfo) },
-                { EntityName.LocalMessage, typeof(LocalMessage) },
-                { EntityName.PrintFormTemplate, typeof(PrintFormTemplate) },
-                { EntityName.TimeZone, typeof(Security.TimeZone) },
-                { EntityName.UserTerritoriesOrganizationUnits, typeof(UserTerritoriesOrganizationUnits) },
-                { EntityName.File, typeof(File) },
-                { EntityName.OrderReleaseTotal, typeof(OrderReleaseTotal) },
-                { EntityName.ReleaseWithdrawal, typeof(ReleaseWithdrawal) },
-                { EntityName.OrderPositionAdvertisement, typeof(OrderPositionAdvertisement) },
-                { EntityName.Note, typeof(Note) },
-                { EntityName.Operation, typeof(Operation) },
-                { EntityName.MessageType, typeof(MessageType) },
-                { EntityName.LegalPersonProfile, typeof(LegalPersonProfile) },
-                { EntityName.ChileLegalPersonProfilePart, typeof(ChileLegalPersonProfilePart) },
-                { EntityName.UkraineLegalPersonProfilePart, typeof(UkraineLegalPersonProfilePart) },
-                { EntityName.EmiratesLegalPersonProfilePart, typeof(EmiratesLegalPersonProfilePart) },
-                { EntityName.AdditionalFirmService, typeof(AdditionalFirmService) },
-                { EntityName.Theme, typeof(Theme) },
-                { EntityName.ThemeCategory, typeof(ThemeCategory) },
-                { EntityName.ThemeOrganizationUnit, typeof(ThemeOrganizationUnit) },
-                { EntityName.ThemeTemplate, typeof(ThemeTemplate) },
-                { EntityName.ActionsHistory, typeof(ActionsHistory) },
-                { EntityName.ActionsHistoryDetail, typeof(ActionsHistoryDetail) },
-                { EntityName.AfterSaleServiceActivity, typeof(AfterSaleServiceActivity) },
-                { EntityName.OrderValidationResult, typeof(OrderValidationResult) },
-                { EntityName.CityPhoneZone, typeof(CityPhoneZone) },
-                { EntityName.Reference, typeof(Reference) },
-                { EntityName.ReferenceItem, typeof(ReferenceItem) },
-                { EntityName.CardRelation, typeof(CardRelation) },
-                { EntityName.DepCard, typeof(DepCard) },
-                { EntityName.FirmAddressService, typeof(FirmAddressService) },
-                { EntityName.ReleaseValidationResult, typeof(ReleaseValidationResult) },
-                { EntityName.ReleasesWithdrawalsPosition, typeof(ReleasesWithdrawalsPosition) },
-                { EntityName.Charge, typeof(Charge) },
-                { EntityName.ChargesHistory, typeof(ChargesHistory) },
-                { EntityName.Building, typeof(Building) },
-
-                // Activity subsystem
-                { EntityName.Activity, typeof(Activity.Activity) },
-                { EntityName.Appointment, typeof(Appointment) },
-                { EntityName.Phonecall, typeof(Phonecall) },
-                { EntityName.Task, typeof(Task) },
-                { EntityName.RegardingObjectReference, typeof(RegardingObject<>) },
-
-                // Security
-                { EntityName.User, typeof(User) },
-                { EntityName.UserRole, typeof(UserRole) },
-                { EntityName.UserTerritory, typeof(UserTerritory) },
-                { EntityName.UserOrganizationUnit, typeof(UserOrganizationUnit) },
-                { EntityName.Department, typeof(Department) },
-                { EntityName.Role, typeof(Role) },
-                { EntityName.Territory, typeof(Territory) },
-                { EntityName.RolePrivilege, typeof(RolePrivilege) },
-                { EntityName.UserProfile, typeof(UserProfile) },
-
-                // Simplified
-                { EntityName.NotificationProcessing, typeof(NotificationProcessings) },
-                { EntityName.NotificationEmail, typeof(NotificationEmails) },
-                { EntityName.NotificationAddress, typeof(NotificationAddresses) },
-                { EntityName.NotificationEmailCc, typeof(NotificationEmailsCc) },
-                { EntityName.NotificationEmailTo, typeof(NotificationEmailsTo) },
-                { EntityName.NotificationEmailAttachment, typeof(NotificationEmailsAttachments) },
-                { EntityName.FileWithContent, typeof(FileWithContent) },
-                { EntityName.HotClientRequest, typeof(HotClientRequest) },
-                { EntityName.PerformedBusinessOperation, typeof(PerformedBusinessOperation) },
-                { EntityName.PerformedOperationPrimaryProcessing, typeof(PerformedOperationPrimaryProcessing) },
-                { EntityName.PerformedOperationFinalProcessing, typeof(PerformedOperationFinalProcessing) },
-                { EntityName.ExportFlowCardExtensionsCardCommercial, typeof(ExportFlowCardExtensionsCardCommercial) },
-                { EntityName.ExportFlowFinancialDataLegalEntity, typeof(ExportFlowFinancialDataLegalEntity) },
-                { EntityName.ExportFlowOrdersAdvMaterial, typeof(ExportFlowOrdersAdvMaterial) },
-                { EntityName.ExportFlowOrdersOrder, typeof(ExportFlowOrdersOrder) },
-                { EntityName.ExportFlowOrdersResource, typeof(ExportFlowOrdersResource) },
-                { EntityName.ExportFlowOrdersTheme, typeof(ExportFlowOrdersTheme) },
-                { EntityName.ExportFlowOrdersThemeBranch, typeof(ExportFlowOrdersThemeBranch) },
-                { EntityName.ExportFlowFinancialDataClient, typeof(ExportFlowFinancialDataClient) },
-                { EntityName.ExportFlowPriceListsPriceList, typeof(ExportFlowPriceListsPriceList) },
-                { EntityName.ExportFlowPriceListsPriceListPosition, typeof(ExportFlowPriceListsPriceListPosition) },
-                { EntityName.ExportFlowOrdersInvoice, typeof(ExportFlowOrdersInvoice) },
-                { EntityName.ExportFlowNomenclaturesNomenclatureElement, typeof(ExportFlowNomenclatures_NomenclatureElement) },
-                { EntityName.ExportFlowNomenclaturesNomenclatureElementRelation, typeof(ExportFlowNomenclatures_NomenclatureElementRelation) },
-                { EntityName.ExportFlowDeliveryDataLetterSendRequest, typeof(ExportFlowDeliveryData_LetterSendRequest) },
-                { EntityName.ExportFlowOrdersDenialReason, typeof(ExportFlowOrders_DenialReason) },
-                { EntityName.ExportFailedEntity, typeof(ExportFailedEntity) },
-                { EntityName.ImportedFirmAddress, typeof(ImportedFirmAddress) },
-                { EntityName.UserEntity, typeof(UserEntity) },
-                { EntityName.Bank, typeof(Bank) },
-                { EntityName.Commune, typeof(Commune) },
-                { EntityName.AcceptanceReportsJournalRecord, typeof(AcceptanceReportsJournalRecord) },
-                { EntityName.DenialReason, typeof(DenialReason) },
-
-                { EntityName.BirthdayCongratulation, typeof(BirthdayCongratulation) },
-                // Dynamic Storage
-                { EntityName.DictionaryEntityInstance, typeof(DictionaryEntityInstance) },
-                { EntityName.DictionaryEntityPropertyInstance, typeof(DictionaryEntityPropertyInstance) },
-                { EntityName.BusinessEntityInstance, typeof(BusinessEntityInstance) },
-                { EntityName.BusinessEntityPropertyInstance, typeof(BusinessEntityPropertyInstance) },
-                */
-            };
-
-        private static readonly Dictionary<Type, IEntityType> ReverseTypeMap = TypeMap.ToDictionary(x => x.Value, x => x.Key);
-
         public static IReadOnlyDictionary<IEntityType, Type> EntitiesMapping
         {
-            get { return TypeMap; }
-        }
-
-        public static Type AsEntityType(this IEntityType entityName)
-        {
-            Type type;
-            if (!entityName.TryGetEntityType(out type))
-            {
-                throw new ArgumentException(string.Format("Cannot find type mapped to EntityName {0}", entityName.ToString()));
-            }
-
-            return type;
-        }
-
-        public static IEntityType AsEntityName(this Type entityType)
-        {
-            IEntityType entityName;
-            if (!entityType.TryGetEntityName(out entityName))
-            {
-                throw new ArgumentException(string.Format("Cannot find EntityName mapped to type {0}", entityType.Name));
-            }
-
-            return entityName;
+            get { return EntityTypeMappingRegistry.Mappings; }
         }
 
         public static bool TryGetEntityType(this IEntityType entityName, out Type entityType)
         {
             entityType = null;
-            return !entityName.IsVirtual() && TypeMap.TryGetValue(entityName, out entityType);
+            return !entityName.IsVirtual() && EntityTypeMappingRegistry.Mappings.TryGetValue(entityName, out entityType);
         }
 
         public static bool TryGetEntityName(this Type type, out IEntityType entityName)
@@ -225,10 +31,43 @@ namespace NuClear.Model.Common.Entities
             }
              */
 
-            return !type.IsPersistenceOnly() && ReverseTypeMap.TryGetValue(type, out entityName);
+            var reverseMappings = EntityTypeMappingRegistry.Mappings.ToDictionary(x => x.Value, x => x.Key);
+            return !type.IsPersistenceOnly() && reverseMappings.TryGetValue(type, out entityName);
         }
 
-        public static IEntityType[] Convert2EntityNames(params Type[] entitiesTypes)
+        public static Type AsEntityType(this IEntityType entityName)
+        {
+            Type type;
+            if (!entityName.TryGetEntityType(out type))
+            {
+                throw new ArgumentException(string.Format("Cannot find type mapped to IEntityType {0}", entityName));
+            }
+
+            return type;
+        }
+
+        public static IEntityType AsEntityName(this Type entityType)
+        {
+            IEntityType entityName;
+            if (!entityType.TryGetEntityName(out entityName))
+            {
+                throw new ArgumentException(string.Format("Cannot find IEntityType mapped to type {0}", entityType.Name));
+            }
+
+            return entityName;
+        }
+
+        public static IEntityType[] AsEntityTypes(this Type[] entitiesTypes)
+        {
+            return Convert2EntityNames(entitiesTypes);
+        }
+
+        public static EntitySet AsEntitySet(this Type[] entitiesTypes)
+        {
+            return Convert2EntityNames(entitiesTypes).ToEntitySet();
+        }
+
+        private static IEntityType[] Convert2EntityNames(params Type[] entitiesTypes)
         {
             var sb = new StringBuilder();
             var entityNames = new IEntityType[entitiesTypes.Length];
@@ -253,16 +92,6 @@ namespace NuClear.Model.Common.Entities
             }
 
             return entityNames;
-        }
-
-        public static IEntityType[] AsEntityNames(this Type[] entitiesTypes)
-        {
-            return Convert2EntityNames(entitiesTypes);
-        }
-
-        public static EntitySet AsEntitySet(this Type[] entitiesTypes)
-        {
-            return Convert2EntityNames(entitiesTypes).ToEntitySet();
         }
     }
 }
