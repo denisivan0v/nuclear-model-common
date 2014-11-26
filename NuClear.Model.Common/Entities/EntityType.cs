@@ -32,6 +32,14 @@ namespace NuClear.Model.Common.Entities
             return value != null;
         }
 
+        public bool TryParse(int id, out IEntityType value)
+        {
+            var entityTypes = GetTypes();
+            value = entityTypes.FirstOrDefault(x => x.Id == id);
+
+            return value != null;
+        }
+
         public bool TryGet<TEntityType>(out TEntityType entityType) where TEntityType : class, IEntityType, new()
         {
             return _instancesStorage.TryGetInstance(typeof(TEntityType), out entityType);

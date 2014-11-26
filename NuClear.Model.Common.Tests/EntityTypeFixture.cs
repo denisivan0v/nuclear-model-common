@@ -42,5 +42,18 @@ namespace NuClear.Model.Common.Tests
                 instance.Should().BeSameAs(initializedInstance);
             }
         }
+
+        [Fact]
+        public void TryParse_extension_method_should_return_instance_based_on_identity_id()
+        {
+            const int None = 0;
+            var initializedInstance = EntityType.Instance.None();
+
+            IEntityType instance;
+            if (EntityType.Instance.TryParse(None, out instance))
+            {
+                instance.Should().BeSameAs(initializedInstance);
+            }
+        }
     }
 }
