@@ -55,5 +55,24 @@ namespace NuClear.Model.Common.Tests
                 instance.Should().BeSameAs(initializedInstance);
             }
         }
+
+        [Fact]
+        public void Parse_extension_method_should_return_instance_based_on_identity_id()
+        {
+            const int None = 0;
+            var initializedInstance = EntityType.Instance.None();
+
+            EntityType.Instance.Parse(None).Should().BeSameAs(initializedInstance);
+        }
+
+        [Fact]
+        public void Parse_extension_method_should_return_null_for_incorrect_id()
+        {
+            const int Incorrect = -1;
+            var initializedInstance = EntityType.Instance.None();
+            
+            EntityType.Instance.Parse(Incorrect).Should().BeNull();
+            EntityType.Instance.Parse(Incorrect).Should().NotBeSameAs(initializedInstance);
+        }
     }
 }
