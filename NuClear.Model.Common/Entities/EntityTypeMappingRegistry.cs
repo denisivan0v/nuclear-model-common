@@ -20,14 +20,29 @@ namespace NuClear.Model.Common.Entities
 
         internal static IReadOnlyDictionary<IEntityType, Type> Mappings
         {
-            get { return MutableMappings; }
+            get { return Instance._mappings; }
+        }
+        
+        internal static IEnumerable<IEntityType> VirtualEntityTypes
+        {
+            get { return Instance._virtualEntityTypes; }
+        }
+
+        internal static IEnumerable<Type> PersistanceEntityClrTypes
+        {
+            get { return Instance._persistanceEntityClrTypes; }
+        }
+
+        private static EntityTypeMappingRegistry Instance
+        {
+            get { return _singleInstance; }
         }
 
         private static Dictionary<IEntityType, Type> MutableMappings
         {
-            get { return _singleInstance._mappings; }
+            get { return Instance._mappings; }
         }
-
+        
         public static void Initialize(IEnumerable<IEntityType> virtualEntityTypes, IEnumerable<Type> persistanceEntityClrTypes)
         {
             if (_singleInstance == null)

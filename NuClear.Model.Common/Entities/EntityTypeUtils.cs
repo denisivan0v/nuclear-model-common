@@ -31,25 +31,15 @@ namespace NuClear.Model.Common.Entities
             return new[] { entityName };
         }
 
+        // TODO {d.ivanov, 26.11.2014}: Возможно ли заэкстендить Type, а не IEntityType?
         public static bool IsVirtual(this IEntityType entityName)
         {
-            // FIXME {d.ivanov, 11.11.2014}: Восстановить логику
-
-            /*
-            return VirtualEntityNames.Contains(entityName);
-             */
-
-            return false;
+            return EntityTypeMappingRegistry.VirtualEntityTypes.Contains(entityName);
         }
 
         public static bool IsPersistenceOnly(this Type checkingType)
         {
-            // FIXME {d.ivanov, 11.11.2014}: Восстановить логику
-            /*
-            return PersistenceOnlyEntities.Contains(checkingType);
-             */
-
-            return false;
+            return EntityTypeMappingRegistry.PersistanceEntityClrTypes.Contains(checkingType);
         }
     }
 }
