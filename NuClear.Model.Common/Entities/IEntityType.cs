@@ -2,6 +2,5 @@
 {
     public interface IEntityType : IIdentity
     {
-        int AsInt32();
     }
 }

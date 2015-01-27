@@ -12,10 +12,5 @@
         {
             return entityType.Id;
         }
-
-        public int AsInt32()
-        {
-            return (int)this;
-        }
     }
 }
