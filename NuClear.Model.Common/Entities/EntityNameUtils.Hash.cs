@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NuClear.Model.Common.Entities
+﻿namespace NuClear.Model.Common.Entities
 {
     public static partial class EntityNameUtils
     {
@@ -14,8 +12,8 @@ namespace NuClear.Model.Common.Entities
             const int Multipler = 0x1000193;
             int hash = 0x7b26bcc5;
             hash = (hash ^ entities.Length) * Multipler;
-            hash = (hash ^ entities[0].AsInt()) * Multipler;
-            hash = (hash ^ entities[entities.Length - 1].AsInt()) * Multipler;
+            hash = (hash ^ entities[0].Id) * Multipler;
+            hash = (hash ^ entities[entities.Length - 1].Id) * Multipler;
             hash += hash << 13;
             hash ^= hash >> 7;
             hash += hash << 3;
@@ -37,7 +35,7 @@ namespace NuClear.Model.Common.Entities
             for (int index = 0; index < entities.Length; index++)
             {
                 var entityName = entities[index];
-                hash += (uint)entityName.AsInt();
+                hash += (uint)entityName.Id;
                 hash += hash << 10;
                 hash ^= hash >> 6;
             }
@@ -47,11 +45,6 @@ namespace NuClear.Model.Common.Entities
             hash += hash << 15;
 
             return (int)hash;
-        }
-
-        private static int AsInt(this IEntityType entityType)
-        {
-            return (int)Convert.ChangeType(entityType, typeof(int));
         }
     }
 }
