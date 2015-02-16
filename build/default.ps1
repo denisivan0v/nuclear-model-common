@@ -9,6 +9,7 @@ if (Test-Path 'Env:\TEAMCITY_VERSION') {
 Import-Module "$BuildToolsRoot\modules\msbuild.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\nuget.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\versioning.psm1" -DisableNameChecking
+Import-Module "$BuildToolsRoot\modules\unittests.psm1" -DisableNameChecking
 
 Task Default -depends Hello
 Task Hello { "Билдскрипт запущен без цели, укажите цель" }
@@ -61,4 +62,16 @@ Task Deploy-NuGet {
 
 	$packges = Get-ChildItem $artifactName -Include '*.nupkg' -Exclude '*.symbols.nupkg' -Recurse
 	Deploy-Packages $packges $source $apiKey
+}
+
+Task Run-UnitTests -depends Set-BuildNumber, Update-AssemblyInfo{
+	$SolutionRelatedAllProjectsDir = '.'
+	
+	$projects = Find-Projects $SolutionRelatedAllProjectsDir '*Tests*'
+	foreach($project in $Projects){
+		$buildFileName = Create-BuildFile $project.FullName
+		Invoke-MSBuild $buildFileName
+	}
+
+	Run-UnitTests $projects
 }
