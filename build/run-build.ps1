@@ -1,7 +1,7 @@
 ﻿param([string[]]$TaskList = @(), [hashtable]$Properties = @{})
 
 if ($TaskList.Count -eq 0){
-	$TaskList = @('Build-NuGet')
+	$TaskList = @('Build-NuGet', 'Deploy-NuGet')
 }
 
 if ($Properties.Count -eq 0){
