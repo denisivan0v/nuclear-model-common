@@ -82,9 +82,11 @@
     <Compile Include="Operations\Identity\Generic\BulkDeactivateIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\BulkDeleteIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\BulkUpdateIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\CancelIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\ChangeClientIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\ChangeTerritoryIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\CheckForDebtsIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\CompleteIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\CopyIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\CreateIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\DeactivateIdentity.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Operations\Identity\Generic\MsCrmExportIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\PrintIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\QualifyIdentity.cs" />
+    <Compile Include="Operations\Identity\Generic\ReopenIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\UpdateIdentity.cs" />
     <Compile Include="Operations\Identity\Generic\UploadIdentity.cs" />
     <Compile Include="Operations\Identity\IBusinessModelIdentity.cs" />
