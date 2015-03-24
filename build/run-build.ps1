@@ -1,7 +1,7 @@
 param([string[]]$TaskList = @(), [hashtable]$Properties = @{})
 
 if ($TaskList.Count -eq 0){
-	$TaskList = @('Run-UnitTests', 'Build-NuGet', 'Deploy-NuGet')
+	$TaskList = @('Run-UnitTests', 'Build-NuGetPackages', 'Deploy-NuGet')
 }
 
 if ($Properties.Count -eq 0){
@@ -17,7 +17,7 @@ $ErrorActionPreference = 'Stop'
 #------------------------------
 cls
 
-$Properties.GlobalVersion = '1.0.10'
+$Properties.GlobalVersion = '1.1.0'
 
 $Properties.BuildFile = Join-Path $PSScriptRoot 'default.ps1'
 $Properties.Dir = @{
@@ -39,5 +39,5 @@ $Properties.Dir = @{
 	& $NugetPath @('restore', $solution.FullName, '-NonInteractive', '-Verbosity', 'quiet')
 }
 
-Import-Module "$($Properties.Dir.Solution)\packages\2GIS.NuClear.BuildTools.0.0.20\tools\buildtools.psm1" -DisableNameChecking
+Import-Module "$($Properties.Dir.Solution)\packages\2GIS.NuClear.BuildTools.0.0.26\tools\buildtools.psm1" -DisableNameChecking
 Run-Build $TaskList $Properties

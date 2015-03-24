@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NuClear.Model.Common.Tests</RootNamespace>
-    <AssemblyName>NuClear.Model.Common.Tests</AssemblyName>
+    <AssemblyName>2GIS.NuClear.Model.Common.Tests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -39,9 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\NuClear.Model.Common\NuClear.Model.Common.csproj">
+    <ProjectReference Include="..\NuClear.Model.Common\Model.Common.csproj">
       <Project>{d9b8b4e8-f7d4-4807-8561-495a47a9cdb7}</Project>
-      <Name>NuClear.Model.Common</Name>
+      <Name>Model.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

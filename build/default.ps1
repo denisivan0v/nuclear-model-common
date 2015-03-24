@@ -54,6 +54,30 @@ Task Build-NuGet -depends Set-BuildNumber, Update-AssemblyInfo {
 	Publish-Artifacts $tempDir 'NuGet'
 }
 
+Task Build-NuGetPackages -depends Set-BuildNumber, Update-AssemblyInfo {
+
+    $SolutionRelatedAllProjectsDir = '.'
+
+    $tempDir = Join-Path $global:Context.Dir.Temp 'NuGet'
+    if (!(Test-Path $tempDir)){
+        md $tempDir | Out-Null
+    }
+
+    $projects = Find-Projects $SolutionRelatedAllProjectsDir -Filter '*.nuproj'
+
+    # bug (https://nuget.codeplex.com/workitem/4013) NuGet fails to extract properties from PCL project
+    # bug will be fixed in NuGet 3.0
+    $Properties = @{
+        'Version' = (Get-Version).SemanticVersion
+        'Author' = '2GIS'
+        'Description' = 'This is Release version'
+    }
+
+    Build-PackagesFromNuProjs $projects $tempDir $Properties
+
+    Publish-Artifacts $tempDir 'NuGet'
+}
+
 Task Deploy-NuGet {
 	$artifactName = Get-Artifacts 'NuGet'
 
