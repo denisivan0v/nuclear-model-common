@@ -21,9 +21,9 @@
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
-    <Id>NuClear.Model.Common</Id>
+    <Id>2GIS.NuClear.Model.Common</Id>
     <Version>0.0.0</Version>
-    <Title>NuClear.Model.Common</Title>
+    <Title>2GIS.NuClear.Model.Common</Title>
     <Authors>2GIS</Authors>
     <Owners>2GIS</Owners>
     <Summary>
@@ -37,7 +37,7 @@
     </LicenseUrl>
     <Copyright>
     </Copyright>
-    <Tags>NuClear.Model.Common</Tags>
+    <Tags>2GIS.NuClear.Model.Common</Tags>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.targets" />
 </Project>
