@@ -35,8 +35,6 @@ namespace NuClear.Model.Common.Operations.Identity
         public const int SetAsDefaultThemeIdentity = 29;
         public const int CreateIdentity = 30;
         public const int UpdateIdentity = 31;
-        public const int WithdrawalIdentity = 32;
-        public const int RevertWithdrawalIdentity = 33;
         public const int DetachIdentity = 34;
         public const int MsCrmExportIdentity = 35;
         public const int PrintIdentity = 36;
