@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{
 EndProject
 Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "Model.Common", "Packaging\Model.Common\Model.Common.nuproj", "{C4E3BB54-0BB6-4A32-ACDA-9DC33D4142C1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{D0724DC8-8014-42D5-9A9A-F7525FDF80E7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{06E6C5B2-F60D-4DD5-B53F-2B54FC8ADFB1}"
 	ProjectSection(SolutionItems) = preProject
 		build\default.ps1 = build\default.ps1
 		build\run-build.ps1 = build\run-build.ps1
