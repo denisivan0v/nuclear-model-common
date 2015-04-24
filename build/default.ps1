@@ -8,6 +8,7 @@ if (Test-Path 'Env:\TEAMCITY_VERSION') {
 
 Import-Module "$BuildToolsRoot\modules\msbuild.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\nuget.psm1" -DisableNameChecking
+Import-Module "$BuildToolsRoot\modules\metadata.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\versioning.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\unittests.psm1" -DisableNameChecking
 
@@ -15,16 +16,17 @@ Task Default -depends Hello
 Task Hello { "Билдскрипт запущен без цели, укажите цель" }
 
 Task Set-BuildNumber {
-	$version = Get-Version
+	$commonMetadata = Get-Metadata 'Common'
 	
 	if (Test-Path 'Env:\TEAMCITY_VERSION') {
-		Write-Host "##teamcity[buildNumber '$($version.SemanticVersion)']"
+		Write-Host "##teamcity[buildNumber '$($commonMetadata.Version.SemanticVersion)']"
 	}
 }
 
 Task Update-AssemblyInfo {
-	$globalDir = Join-Path $global:Context.Dir.Solution '.'
-	$assemblyInfos = Get-ChildItem $globalDir -Filter 'AssemblyInfo.cs' -Recurse
+	$commonMetadata = Get-Metadata 'Common'
+
+	$assemblyInfos = Get-ChildItem $commonMetadata.Dir.Solution -Filter 'AssemblyInfo.Version.cs' -Recurse
 	Update-AssemblyInfo $assemblyInfos
 }
 
@@ -32,7 +34,9 @@ Task Build-NuGetPackages -depends Set-BuildNumber, Update-AssemblyInfo {
 
     $SolutionRelatedAllProjectsDir = '.'
 
-    $tempDir = Join-Path $global:Context.Dir.Temp 'NuGet'
+	$commonMetadata = Get-Metadata 'Common'
+
+	$tempDir = Join-Path $commonMetadata.Dir.Temp 'NuGet'
     if (!(Test-Path $tempDir)){
         md $tempDir | Out-Null
     }
