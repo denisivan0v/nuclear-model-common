@@ -13,7 +13,9 @@ namespace NuClear.Model.Common.Operations.Identity
 
         public OperationIdentityRegistry(IEnumerable<IOperationIdentity> identities)
         {
-            var nonUniqueIdentities = identities.GroupBy(x => x.Id).Where(x => x.Skip(1).Any()).ToArray();
+            var mergedIdentities = GetGenericOperationIdentities(_operationIdentityIndicator.GetTypeInfo()).Concat(identities).ToArray();
+
+            var nonUniqueIdentities = mergedIdentities.GroupBy(x => x.Id).Where(x => x.Skip(1).Any()).ToArray();
             if (nonUniqueIdentities.Any())
             {
                 var sb = new StringBuilder("Operation identity id have to be unique constraint is violated. Violations: ");
@@ -23,7 +25,7 @@ namespace NuClear.Model.Common.Operations.Identity
                 throw new InvalidOperationException(sb.ToString());
             }
 
-            _identitiesMap = identities.ToDictionary(x => x.Id);
+            _identitiesMap = mergedIdentities.ToDictionary(x => x.Id);
         }
         
         TOperationIdentity IOperationIdentityRegistry.GetIdentity<TOperationIdentity>()
@@ -59,6 +61,17 @@ namespace NuClear.Model.Common.Operations.Identity
             {
                 return _identitiesMap.Values.ToArray();
             }
+        }
+
+        private static IEnumerable<IOperationIdentity> GetGenericOperationIdentities(TypeInfo operationIdentityIndicator)
+        {
+            var genericOperationIdentityTypes = operationIdentityIndicator.Assembly.ExportedTypes
+                                                                          .Select(x => x.GetTypeInfo())
+                                                                          .Where(operationIdentityIndicator.IsAssignableFrom)
+                                                                          .Where(x => !x.IsInterface && !x.IsAbstract)
+                                                                          .ToArray();
+
+            return genericOperationIdentityTypes.Select(x => (IOperationIdentity)Activator.CreateInstance(x.AsType()));
         }
 
         private IOperationIdentity ResolveIdentity(Type identityType)
