@@ -2,35 +2,15 @@
 $ErrorActionPreference = 'Stop'
 #------------------------------
 
-if (Test-Path 'Env:\TEAMCITY_VERSION') {
-	FormatTaskName "##teamcity[progressMessage '{0}']"
-}
-
 Import-Module "$BuildToolsRoot\modules\msbuild.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\nuget.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\metadata.psm1" -DisableNameChecking
-Import-Module "$BuildToolsRoot\modules\versioning.psm1" -DisableNameChecking
 Import-Module "$BuildToolsRoot\modules\unittests.psm1" -DisableNameChecking
 
 Task Default -depends Hello
 Task Hello { "Билдскрипт запущен без цели, укажите цель" }
 
-Task Set-BuildNumber {
-	$commonMetadata = Get-Metadata 'Common'
-	
-	if (Test-Path 'Env:\TEAMCITY_VERSION') {
-		Write-Host "##teamcity[buildNumber '$($commonMetadata.Version.SemanticVersion)']"
-	}
-}
-
-Task Update-AssemblyInfo {
-	$commonMetadata = Get-Metadata 'Common'
-
-	$assemblyInfos = Get-ChildItem $commonMetadata.Dir.Solution -Filter 'AssemblyInfo.Version.cs' -Recurse
-	Update-AssemblyInfo $assemblyInfos
-}
-
-Task Build-NuGetPackages -depends Set-BuildNumber, Update-AssemblyInfo {
+Task Build-NuGetPackages {
 
     $SolutionRelatedAllProjectsDir = '.'
 
@@ -52,7 +32,7 @@ Task Deploy-NuGet {
 	Deploy-Packages $artifactName
 }
 
-Task Run-UnitTests -depends Set-BuildNumber, Update-AssemblyInfo{
+Task Run-UnitTests {
 	$SolutionRelatedAllProjectsDir = '.'
 	
 	$projects = Find-Projects $SolutionRelatedAllProjectsDir '*Tests*'

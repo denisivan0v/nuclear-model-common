@@ -26,5 +26,5 @@ $Properties.SolutionDir = Join-Path $PSScriptRoot '..'
 	& $NugetPath @('restore', $solution.FullName, '-NonInteractive', '-Verbosity', 'quiet')
 }
 
-Import-Module "$($Properties.SolutionDir)\packages\2GIS.NuClear.BuildTools.0.0.38\tools\buildtools.psm1" -DisableNameChecking
+Import-Module "$($Properties.SolutionDir)\packages\2GIS.NuClear.BuildTools.0.0.41\tools\buildtools.psm1" -DisableNameChecking -Force
 Run-Build $TaskList $Properties
