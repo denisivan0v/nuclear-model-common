@@ -25,7 +25,7 @@ namespace NuClear.Model.Common.Entities
                 return name;
             }
 
-            var localizedName = resourceManager.GetString(type.Name + name, cultureInfo);
+            var localizedName = resourceManager.GetString(type.Name, cultureInfo);
             return localizedName ?? name;
         }
     }
